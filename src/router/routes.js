@@ -1,5 +1,5 @@
 import '../pages/homePage.js';
-import '../pages/gamePage.js';
+import '../pages/gamePage/gamePage.js';
 
 export const routes = [
   { path: '/', component: 'home-page' },

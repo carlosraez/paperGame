@@ -1,5 +1,7 @@
 import { LitElement, html } from 'lit';
-import '../components/gft-disconnect/gft-disconnect.js';
+
+import '../../components/gft-disconnect/gft-disconnect.js';
+import styles from './gamePage-styles.js';
 
 class GamePage extends LitElement {
   static get properties() {
@@ -13,6 +15,10 @@ class GamePage extends LitElement {
     this.playerName = '';
   }
 
+  static get styles() {
+    return [styles];
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.playerName = localStorage.getItem('playerName');
@@ -21,8 +27,9 @@ class GamePage extends LitElement {
   render() {
     return html`
       <div>
-        <div>
-        <p>Name: <span>${this.playerName}<span><gft-disconnect></gft-disconnect></p>
+        <div class="titleGameUser">
+        <p>Name: <span>${this.playerName}</p>
+        <p><gft-disconnect></gft-disconnect></p>
         </div>
         <button>Game</button>
       </div>

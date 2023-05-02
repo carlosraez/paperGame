@@ -19,11 +19,9 @@ class GftDisconnect extends LitElement {
 
   render() {
     return html`
-      <div>
-        <button @click="${this._handleExit}" class="exit-button">
-          <span class="material-icons">exit_to_app</span> Salir
-        </button>
-      </div>
+      <button @click="${this._handleExit}" class="exit-button">
+        <span class="material-icons">exit_to_app</span>
+      </button>
     `;
   }
 }

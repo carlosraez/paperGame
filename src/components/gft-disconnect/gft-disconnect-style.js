@@ -1,6 +1,9 @@
 import { css } from 'lit';
 
 export default css`
+  .exit-button {
+    border: none;
+  }
   .material-icons {
     font-family: 'Material Icons';
     font-weight: normal;
