@@ -21,7 +21,9 @@ class GamePage extends LitElement {
   render() {
     return html`
       <div>
+        <div>
         <p>Name: <span>${this.playerName}<span><gft-disconnect></gft-disconnect></p>
+        </div>
         <button>Game</button>
       </div>
     `;
