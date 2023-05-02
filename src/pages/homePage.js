@@ -37,7 +37,7 @@ class HomePage extends LitElement {
   _handleStart() {
     const playerName = this._inputValue;
     localStorage.setItem('playerName', playerName);
-    Router.go(`/game/${playerName}`);
+    Router.go(`/game`);
   }
 
   render() {

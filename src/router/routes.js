@@ -1,10 +1,9 @@
-import { Router } from '@vaadin/router';
+import '../pages/homePage.js';
+import '../pages/gamePage.js';
 
 export const routes = [
+  { path: '/', component: 'home-page' },
   { path: '/home', component: 'home-page' },
   { path: '/game', component: 'game-page' },
   { path: '(.*)', component: 'home-page' }
 ];
-
-const router = new Router(document.querySelector('game-paper-lit'));
-router.setRoutes(routes);
