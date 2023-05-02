@@ -15,13 +15,7 @@ class GftButtonSubmit extends LitElement {
        * Indica si está o no desactivado el botón.
        * @type {Boolean}
        */
-      disabledButton: { type: Boolean },
-
-      /**
-       * Indica tipo de botón.
-       * @type {string}
-       */
-      type: { type: String, reflect: true }
+      disabledButton: { type: Boolean }
     };
   }
 
@@ -31,16 +25,35 @@ class GftButtonSubmit extends LitElement {
 
   constructor() {
     super();
-    this.label = 'Join';
+    this.label = '';
     this.disabledButton = false;
   }
 
   render() {
     return html`
       <div>
-        <button class="buttonJoin">${this.label}</button>
+        <button
+          class="buttonJoin"
+          @click="${this._onClick}"
+          ?disabled="${this.disabledButton}"
+        >
+          ${this.label}
+        </button>
       </div>
     `;
+  }
+
+  /**
+   * Maneja el evento del click del boton.
+   * @fires CustomEvent#gft-button-click
+   */
+  _onClick() {
+    this.dispatchEvent(
+      new CustomEvent('gft-button-click', {
+        bubbles: true,
+        composed: true
+      })
+    );
   }
 }
 

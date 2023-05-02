@@ -5,6 +5,24 @@ import '../components/gft-title/gft-title.js';
 import '../components/gft-buttonSubmit/gft-button-submit.js';
 
 class HomePage extends LitElement {
+  static get properties() {
+    return {
+      /**
+       * Un valor booleano que indica si se está cargando información.
+       * @type {Boolean}
+       * @private
+       */
+      _isLoading: { type: Boolean },
+
+      /**
+       * El valor del input.
+       * @type {String}
+       * @private
+       */
+      _inputValue: { type: String }
+    };
+  }
+
   constructor() {
     super();
     this._inputValue = '';
@@ -26,7 +44,11 @@ class HomePage extends LitElement {
           .text="${this._inputValue}"
           @gft-input-change="${this._handleInputChange}"
         ></gft-input>
-        <gft-button-submit></gft-button-submit>
+        <gft-button-submit
+          label="Join"
+          ?disabledButton="${!this._inputValue}"
+          @gft-button-click="${this._handleStart}"
+        ></gft-button-submit>
       </div>
     `;
   }
