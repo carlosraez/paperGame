@@ -1,6 +1,7 @@
 import { LitElement, html } from 'lit';
 
 import '../../components/gft-disconnect/gft-disconnect.js';
+import '../../components/gft-game-options/gft-game-options.js';
 import styles from './gamePage-styles.js';
 
 class GamePage extends LitElement {
@@ -29,6 +30,7 @@ class GamePage extends LitElement {
     <gft-disconnect></gft-disconnect>
     <p>Name: <span>${this.playerName}</p>
     <div>Score: 2</div>
+    <gft-game-options></gft-game-options>
     </div>`;
   }
 
