@@ -1,7 +1,7 @@
 import { css } from 'lit';
 
 export default css`
-  .recetas-app {
+  .game-app {
     display: flex;
     flex-direction: column;
     justify-content: center;
