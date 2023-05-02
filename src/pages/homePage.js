@@ -1,4 +1,5 @@
 import { LitElement, html } from 'lit';
+import { Router } from '@vaadin/router';
 
 import '../components/gft-input/gft-input.js';
 import '../components/gft-title/gft-title.js';
@@ -7,13 +8,6 @@ import '../components/gft-buttonSubmit/gft-button-submit.js';
 class HomePage extends LitElement {
   static get properties() {
     return {
-      /**
-       * Un valor booleano que indica si se está cargando información.
-       * @type {Boolean}
-       * @private
-       */
-      _isLoading: { type: Boolean },
-
       /**
        * El valor del input.
        * @type {String}
@@ -34,6 +28,16 @@ class HomePage extends LitElement {
    */
   _handleInputChange(e) {
     this._inputValue = e.detail.text;
+  }
+
+  /**
+   * Guarda el nombre del jugador en localStorage y redirige al usuario a la pantalla de juego.
+   * @private
+   */
+  _handleStart() {
+    const playerName = this._inputValue;
+    localStorage.setItem('playerName', playerName);
+    Router.go(`/game/${playerName}`);
   }
 
   render() {
