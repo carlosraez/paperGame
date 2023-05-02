@@ -24,16 +24,16 @@ class GamePage extends LitElement {
     this.playerName = localStorage.getItem('playerName');
   }
 
+  _getTitleApp() {
+    return html`<div class="titleGameUser">
+    <gft-disconnect></gft-disconnect>
+    <p>Name: <span>${this.playerName}</p>
+    <div>Score: 2</div>
+    </div>`;
+  }
+
   render() {
-    return html`
-      <div>
-        <div class="titleGameUser">
-        <p>Name: <span>${this.playerName}</p>
-        <p><gft-disconnect></gft-disconnect></p>
-        </div>
-        <button>Game</button>
-      </div>
-    `;
+    return html` <div>${this._getTitleApp()}</div> `;
   }
 }
 
