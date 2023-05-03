@@ -16,14 +16,15 @@ class GftGameOptions extends LitElement {
     return html`
       <div class="containerOptions">
         <div class="img-container">
-          <p>Piedra</p>
-        </div>
-        <div class="img-container">
-          <img src="papel.png" alt="Papel" />
+          <gft-icon name="exit_to_app"></gft-icon>
           <p>Papel</p>
         </div>
         <div class="img-container">
-          <img src="tijera.png" alt="Tijera" />
+          <gft-icon name="exit_to_app"></gft-icon>
+          <p>Papel</p>
+        </div>
+        <div class="img-container">
+          <gft-icon name="exit_to_app"></gft-icon>
           <p>Tijera</p>
         </div>
       </div>
