@@ -13,14 +13,14 @@ class GftDisconnect extends LitElement {
     return [styles];
   }
 
-  _handleExit() {
+  static _handleExit() {
     Router.go('/home');
   }
 
   render() {
     return html`
-      <button @click="${this._handleExit}" class="exit-button">
-        <span class="material-icons">exit_to_app</span>
+      <button @click="${GftDisconnect._handleExit}" class="exit-button">
+        <gft-icon name="exit_to_app"></gft-icon>
       </button>
     `;
   }

@@ -1,6 +1,7 @@
 import { LitElement, html } from 'lit';
 
 import styles from './gft-title-style.js';
+import '../gft-icon/gft-icon.js';
 
 class GftTitle extends LitElement {
   constructor() {
@@ -15,7 +16,7 @@ class GftTitle extends LitElement {
   render() {
     return html`
       <div class="containerTitle">
-        <span class="material-icons"> videogame_asset </span>
+        <gft-icon name="videogame_asset"></gft-icon>
         <h1 class="titleText">Create new Player</h1>
       </div>
     `;

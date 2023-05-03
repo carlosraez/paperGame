@@ -16,7 +16,6 @@ class GftGameOptions extends LitElement {
     return html`
       <div class="containerOptions">
         <div class="img-container">
-          <img src="" alt="Piedra" />
           <p>Piedra</p>
         </div>
         <div class="img-container">
