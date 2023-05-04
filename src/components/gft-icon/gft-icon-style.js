@@ -7,6 +7,9 @@ export default css`
     border: 2px solid black;
     padding: 20px;
   }
+  :host([iconOptionGameClass]) .iconContainer:disabled {
+    background-color: rgb(2, 132, 133);
+  }
   .material-icons {
     font-family: 'Material Icons';
     font-weight: normal;

@@ -17,7 +17,17 @@ class GftIcon extends LitElement {
       iconOptionGameClass: {
         type: Boolean,
         reflect: true
-      }
+      },
+      /**
+       * Indica el id del icono.
+       * @type {Boolean}
+       */
+      iconId: { type: String },
+      /**
+       * Indica si el botón está deshabilitado para evitar clicks repetidos.
+       * @type {Boolean}
+       */
+      clickDisabled: { type: Boolean }
     };
   }
 
@@ -25,6 +35,8 @@ class GftIcon extends LitElement {
     super();
     this.name = '';
     this.iconOptionGameClass = false;
+    this.iconId = '';
+    this.clickDisabled = false;
   }
 
   static get styles() {
@@ -32,7 +44,11 @@ class GftIcon extends LitElement {
   }
 
   render() {
-    return html`<button class="iconContainer" @click=${this.handleClick}>
+    return html`<button
+      class="iconContainer"
+      @click=${this.handleClick}
+      ?disabled=${this.clickDisabled}
+    >
       <span class="material-icons">${this.name}</span>
     </button>`;
   }
@@ -50,7 +66,7 @@ class GftIcon extends LitElement {
       bubbles: true,
       composed: true,
       detail: {
-        iconName: this.name
+        iconName: this.iconId
       }
     });
     this.dispatchEvent(event);

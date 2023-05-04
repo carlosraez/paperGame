@@ -3,36 +3,51 @@ import { LitElement, html } from 'lit';
 import styles from './gft-game-options-style.js';
 
 class GftGameOptions extends LitElement {
+  static get properties() {
+    return {
+      disabledIcons: {
+        type: Object,
+        value: {
+          stone: false,
+          paper: false,
+          scissors: false
+        }
+      }
+    };
+  }
+
   constructor() {
     super();
-    this.text = '';
+    this.disabledIcons = {
+      stone: false,
+      paper: false,
+      scissors: false
+    };
+    this.icons = [
+      { name: 'lens', iconID: 'stone' },
+      { name: 'back_hand', iconID: 'paper' },
+      { name: 'content_cut', iconID: 'scissors' }
+    ];
   }
 
   static get styles() {
     return [styles];
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.addEventListener('icon-clicked', this.handleIconClicked);
-  }
-
-  static _handleIconClicked(event) {
-    console.log(event.detail.iconName);
-    // Aquí puedes hacer lo que necesites con el evento recibido
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.removeEventListener('icon-clicked', this.handleIconClicked);
-  }
-
   render() {
     return html`
       <div class="containerOptions">
-        <gft-icon name="lens" iconOptionGameClass></gft-icon>
-        <gft-icon name="back_hand" iconOptionGameClass></gft-icon>
-        <gft-icon name="content_cut" iconOptionGameClass></gft-icon>
+        ${this.icons.map(
+          ({ name, iconID }) =>
+            html`
+              <gft-icon
+                name=${name}
+                iconID=${iconID}
+                iconOptionGameClass
+                ?clickDisabled=${this.disabledIcons[iconID]}
+              ></gft-icon>
+            `
+        )}
       </div>
     `;
   }
