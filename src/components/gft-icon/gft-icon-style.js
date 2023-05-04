@@ -1,6 +1,12 @@
 import { css } from 'lit';
 
 export default css`
+  :host([iconOptionGameClass]) .iconContainer {
+    margin-left: 20px;
+    cursor: pointer;
+    border: 2px solid black;
+    padding: 20px;
+  }
   .material-icons {
     font-family: 'Material Icons';
     font-weight: normal;

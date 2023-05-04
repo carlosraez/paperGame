@@ -15,18 +15,9 @@ class GftGameOptions extends LitElement {
   render() {
     return html`
       <div class="containerOptions">
-        <div class="img-container">
-          <gft-icon name="exit_to_app"></gft-icon>
-          <p>Papel</p>
-        </div>
-        <div class="img-container">
-          <gft-icon name="exit_to_app"></gft-icon>
-          <p>Papel</p>
-        </div>
-        <div class="img-container">
-          <gft-icon name="exit_to_app"></gft-icon>
-          <p>Tijera</p>
-        </div>
+        <gft-icon name="lens" iconOptionGameClass></gft-icon>
+        <gft-icon name="back_hand" iconOptionGameClass></gft-icon>
+        <gft-icon name="content_cut" iconOptionGameClass></gft-icon>
       </div>
     `;
   }

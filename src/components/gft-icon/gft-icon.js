@@ -9,13 +9,22 @@ class GftIcon extends LitElement {
        * Nombre del icono.
        * @type {String}
        */
-      name: { type: String }
+      name: { type: String },
+      /**
+       * Indica si se debe agregar la clase 'iconContainer'.
+       * @type {Boolean}
+       */
+      iconOptionGameClass: {
+        type: Boolean,
+        reflect: true
+      }
     };
   }
 
   constructor() {
     super();
     this.name = '';
+    this.iconOptionGameClass = false;
   }
 
   static get styles() {
@@ -23,7 +32,9 @@ class GftIcon extends LitElement {
   }
 
   render() {
-    return html` <span class="material-icons">${this.name}</span> `;
+    return html`<div class="iconContainer">
+      <span class="material-icons">${this.name}</span>
+    </div>`;
   }
 }
 
