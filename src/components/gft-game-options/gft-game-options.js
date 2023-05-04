@@ -12,6 +12,21 @@ class GftGameOptions extends LitElement {
     return [styles];
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener('icon-clicked', this.handleIconClicked);
+  }
+
+  static _handleIconClicked(event) {
+    console.log(event.detail.iconName);
+    // Aquí puedes hacer lo que necesites con el evento recibido
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('icon-clicked', this.handleIconClicked);
+  }
+
   render() {
     return html`
       <div class="containerOptions">

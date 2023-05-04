@@ -32,9 +32,28 @@ class GftIcon extends LitElement {
   }
 
   render() {
-    return html`<div class="iconContainer">
+    return html`<button class="iconContainer" @click=${this.handleClick}>
       <span class="material-icons">${this.name}</span>
-    </div>`;
+    </button>`;
+  }
+
+  /**
+   * Manejador de eventos para el click en el icono.
+   * Dispara un evento personalizado con el nombre del icono.
+   * @fires CustomEvent#icon-clicked
+   * @emits {Object} CustomEvent
+   * @emits {String} CustomEvent.detail.iconName - El nombre del icono que fue clickeado.
+   * @returns {void}
+   */
+  handleClick() {
+    const event = new CustomEvent('icon-clicked', {
+      bubbles: true,
+      composed: true,
+      detail: {
+        iconName: this.name
+      }
+    });
+    this.dispatchEvent(event);
   }
 }
 
