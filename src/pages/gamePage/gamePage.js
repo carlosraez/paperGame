@@ -2,6 +2,7 @@ import { LitElement, html } from 'lit';
 
 import '../../components/gft-disconnect/gft-disconnect.js';
 import '../../components/gft-game-options/gft-game-options.js';
+import { getBotSelection } from '../../services/botLogic.js';
 import styles from './gamePage-styles.js';
 
 class GamePage extends LitElement {
@@ -81,25 +82,14 @@ class GamePage extends LitElement {
 
   _botIsRunning() {
     setTimeout(() => {
-      const options = ['paper', 'stone', 'scissors'];
-      const botSelection = options[Math.floor(Math.random() * options.length)];
-
       const userSelection = this.playerSelection;
-
-      if (botSelection === userSelection) {
-        this.result = 'Tie';
-      } else if (
-        (botSelection === 'stone' && userSelection === 'scissors') ||
-        (botSelection === 'scissors' && userSelection === 'paper') ||
-        (botSelection === 'paper' && userSelection === 'stone')
-      ) {
-        this.result = 'Bot wins';
-        this.score -= 1;
-      } else {
-        this.result = 'You win';
-        this.score += 1;
-      }
+      const { botSelection, result, newScore } = getBotSelection(
+        userSelection,
+        this.score
+      );
       this.botSelection = botSelection;
+      this.score = newScore;
+      this.result = result;
       this.isLoading = false;
       this.disabledIcons = {
         paper: false,
@@ -138,11 +128,11 @@ class GamePage extends LitElement {
 
   _getTitleApp() {
     return html`<div class="titleGameUser">
-    <gft-disconnect></gft-disconnect>
-    <p>Name: <span>${this.playerName}</p>
-    <div>Score: ${this.score}</div>
-    <gft-game-options .disabledIcons=${this.disabledIcons}></gft-game-options>
-    ${this._getResult()}
+      <gft-disconnect></gft-disconnect>
+      <p>Name: <span>${this.playerName}</span></p>
+      <div>Score: ${this.score}</div>
+      <gft-game-options .disabledIcons=${this.disabledIcons}></gft-game-options>
+      ${this._getResult()}
     </div>`;
   }
 
