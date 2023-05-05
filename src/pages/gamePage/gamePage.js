@@ -46,13 +46,23 @@ class GamePage extends LitElement {
   }
 
   /**
-   * Este método se llama automáticamente cuando el elemento es añadido al DOM.
-   * Aquí se carga el valor del `playerName` desde el LocalStorage y se añade
-   * un escuchador de eventos para el evento `icon-clicked`.
+   * Este método es llamado automáticamente cuando el elemento es añadido al DOM.
+   * Carga el valor del nombre del jugador (playerName) desde el LocalStorage y
+   * carga el estado del juego (score, result y botSelection) desde el
+   * LocalStorage si existe.
+   * Además, añade un escuchador de eventos para el evento icon-clicked.
+   * @returns {void}
    */
   connectedCallback() {
     super.connectedCallback();
     this.playerName = localStorage.getItem('playerName');
+    const gameData = localStorage.getItem('gameData');
+    if (gameData) {
+      const data = JSON.parse(gameData);
+      this.score = data.score;
+      this.result = data.result;
+      this.botSelection = data.botSelection;
+    }
     this.addEventListener('icon-clicked', this.handleIconClicked);
   }
 
@@ -76,7 +86,6 @@ class GamePage extends LitElement {
       this.isLoading = true;
       this._getSelectionUser();
       this._botIsRunning();
-      this.requestUpdate();
     }
   }
 
@@ -97,6 +106,12 @@ class GamePage extends LitElement {
         scissors: false
       };
       this.requestUpdate();
+      const data = {
+        score: this.score,
+        result: this.result,
+        botSelection: this.botSelection
+      };
+      localStorage.setItem('gameData', JSON.stringify(data));
     }, 1000);
   }
 
