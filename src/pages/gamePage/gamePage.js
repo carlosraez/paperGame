@@ -7,8 +7,20 @@ import styles from './gamePage-styles.js';
 class GamePage extends LitElement {
   static get properties() {
     return {
+      /**
+       * Nombre del jugador.
+       * @type {String}
+       */
       playerName: { type: String },
+      /**
+       * Objeto que describe el estado de los iconos.
+       * @type {Object}
+       */
       disabledIcons: { type: Object },
+      /**
+       * Una bandera que indica si la maquína se esta ejecutando la respuesta.
+       * @type {Boolean}
+       */
       isLoading: { type: Boolean }
     };
   }
@@ -16,12 +28,15 @@ class GamePage extends LitElement {
   constructor() {
     super();
     this.playerName = '';
+    this.score = 0;
+    this.result = '';
+    this.playerSelection = '';
+    this.botSelection = '';
+    this.isLoading = false;
     this.disabledIcons = {
       paper: false,
       stone: false,
-      scissors: false,
-      isLoading: false,
-      botSelection: ''
+      scissors: false
     };
   }
 
@@ -58,6 +73,7 @@ class GamePage extends LitElement {
         [iconName]: true
       };
       this.isLoading = true;
+      this._getSelectionUser();
       this._botIsRunning();
       this.requestUpdate();
     }
@@ -66,7 +82,30 @@ class GamePage extends LitElement {
   _botIsRunning() {
     setTimeout(() => {
       const options = ['paper', 'stone', 'scissors'];
-      this.botSelection = options[Math.floor(Math.random() * options.length)];
+      const botSelection = options[Math.floor(Math.random() * options.length)];
+
+      const userSelection = this.playerSelection;
+
+      if (botSelection === userSelection) {
+        this.result = 'Tie';
+      } else if (
+        (botSelection === 'stone' && userSelection === 'scissors') ||
+        (botSelection === 'scissors' && userSelection === 'paper') ||
+        (botSelection === 'paper' && userSelection === 'stone')
+      ) {
+        this.result = 'Bot wins';
+        this.score -= 1;
+      } else {
+        this.result = 'You win';
+        this.score += 1;
+      }
+      this.botSelection = botSelection;
+      this.isLoading = false;
+      this.disabledIcons = {
+        paper: false,
+        stone: false,
+        scissors: false
+      };
       this.requestUpdate();
     }, 1000);
   }
@@ -77,13 +116,15 @@ class GamePage extends LitElement {
   }
 
   /**
-   * Retorna un array de elementos HTML que representan los iconos seleccionados por el usuario.
-   * @returns {Array<HTMLElement>} Array de elementos HTML que representan los iconos seleccionados por el usuario.
+   * Retorna el HTML del elemento seleccionado por el usuario.
+   * @returns {string} HTML del elemento seleccionado por el usuario.
    */
   _getSelectionUser() {
-    return Object.entries(this.disabledIcons).map(
-      ([icon, disabled]) => html` ${disabled ? html`${icon}` : null} `
-    );
+    for (const [icon, disabled] of Object.entries(this.disabledIcons)) {
+      if (disabled) {
+        this.playerSelection = icon;
+      }
+    }
   }
 
   /**
@@ -91,16 +132,15 @@ class GamePage extends LitElement {
    * @returns {TemplateResult} HTML template string.
    */
   _getResult() {
-    return html` <p>
-      You: ${this._getSelectionUser()} - Bot: ${this.botSelection}
-    </p>`;
+    return html` <p>You: ${this.playerSelection} - Bot: ${this.botSelection}</p>
+      <p>${this.result}</p>`;
   }
 
   _getTitleApp() {
     return html`<div class="titleGameUser">
     <gft-disconnect></gft-disconnect>
     <p>Name: <span>${this.playerName}</p>
-    <div>Score: 2</div>
+    <div>Score: ${this.score}</div>
     <gft-game-options .disabledIcons=${this.disabledIcons}></gft-game-options>
     ${this._getResult()}
     </div>`;
