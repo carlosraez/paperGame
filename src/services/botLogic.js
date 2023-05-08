@@ -18,5 +18,9 @@ export function getBotSelection(userSelection, score) {
     newScore += 1;
   }
 
+  if (newScore < 0) {
+    newScore = 0;
+  }
+
   return { botSelection, result, newScore };
 }

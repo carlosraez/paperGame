@@ -57,11 +57,14 @@ class GamePage extends LitElement {
     super.connectedCallback();
     this.playerName = localStorage.getItem('playerName');
     const gameData = localStorage.getItem('gameData');
-    if (gameData) {
+    if (gameData && gameData.playerName === this.playerName) {
+      this.isNewPlayer = false;
       const data = JSON.parse(gameData);
       this.score = data.score;
       this.result = data.result;
       this.botSelection = data.botSelection;
+    } else {
+      localStorage.removeItem('gameData');
     }
     this.addEventListener('icon-clicked', this.handleIconClicked);
   }
@@ -107,10 +110,12 @@ class GamePage extends LitElement {
       };
       this.requestUpdate();
       const data = {
+        playerName: this.playerName,
         score: this.score,
         result: this.result,
         botSelection: this.botSelection
       };
+
       localStorage.setItem('gameData', JSON.stringify(data));
     }, 1000);
   }
