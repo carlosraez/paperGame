@@ -1,6 +1,24 @@
+function getWinningOption(userSelection) {
+  switch (userSelection) {
+    case 'paper':
+      return 'stone';
+    case 'stone':
+      return 'scissors';
+    case 'scissors':
+      return 'paper';
+    default:
+      return '';
+  }
+}
+
 export function getBotSelection(userSelection, score) {
   const options = ['paper', 'stone', 'scissors'];
-  const botSelection = options[Math.floor(Math.random() * options.length)];
+  // 70% chance of selecting the option that beats the user, 30% chance of selecting a random option
+  const botSelection =
+    Math.random() < 0.7
+      ? getWinningOption(userSelection)
+      : options[Math.floor(Math.random() * options.length)];
+
   let result = '';
   let newScore = score;
 
