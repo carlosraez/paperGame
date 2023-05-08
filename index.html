@@ -6,7 +6,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
-    <meta name="Description" content="Put your description here." />
+    <meta
+      name="Description"
+      content="Play the classic game of rock-paper-scissors online with friends or against the computer. Choose your weapon and see who comes out on top!"
+    />
     <base href="/" />
     <style>
       html,
@@ -17,14 +20,31 @@
         background-color: #ededed;
       }
     </style>
-    <title>Piedra Papel o Tijera</title>
+    <title>Rock Paper Scissors</title>
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <link rel="manifest" href="/manifest.json" />
   </head>
   <body>
     <game-paper-lit></game-paper-lit>
     <script type="module" src="./src/game-paper-lit.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/serviceWorker.js').then(
+            registration => {
+              // eslint-disable-next-line no-console
+              console.log('Service worker registered:', registration);
+            },
+            error => {
+              // eslint-disable-next-line no-console
+              console.log('Service worker registration failed:', error);
+            }
+          );
+        });
+      }
+    </script>
   </body>
 </html>
