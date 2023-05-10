@@ -20,7 +20,6 @@ describe('gft-game-options', () => {
     `);
 
     const icons = el.shadowRoot.querySelectorAll('gft-icon');
-    console.log(icons[0]);
 
     expect(icons[0].getAttribute('name')).to.equal('lens');
     expect(icons[0].getAttribute('iconID')).to.equal('stone');
