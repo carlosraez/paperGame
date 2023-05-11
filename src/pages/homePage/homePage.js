@@ -1,9 +1,9 @@
 import { LitElement, html } from 'lit';
 import { Router } from '@vaadin/router';
 
-import '../components/gft-input/gft-input.js';
-import '../components/gft-title/gft-title.js';
-import '../components/gft-buttonSubmit/gft-button-submit.js';
+import '../../components/gft-input/gft-input.js';
+import '../../components/gft-title/gft-title.js';
+import '../../components/gft-buttonSubmit/gft-button-submit.js';
 
 class HomePage extends LitElement {
   static get properties() {

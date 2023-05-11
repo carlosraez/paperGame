@@ -1,4 +1,4 @@
-import '../pages/homePage.js';
+import '../pages/homePage/homePage.js';
 import '../pages/gamePage/gamePage.js';
 
 export const routes = [
