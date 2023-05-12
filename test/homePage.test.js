@@ -1,6 +1,4 @@
 import { html, fixture, fixtureCleanup, expect } from '@open-wc/testing';
-import sinon from 'sinon';
-import { Router } from '@vaadin/router';
 import '../src/pages/homePage/homePage.js';
 import '../src/game-paper-lit.js';
 
